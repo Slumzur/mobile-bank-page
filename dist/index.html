@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/newSiteAssets/fonts/Roboto/fonts.css">
+  <style type="text/css">
+    body {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+  </style>
+  <title>Гид по мобильному приложению</title>
+</head>
+
+<body>
+  <div id="mobileBankPage"></div>
+  <script src="mobileBankPage.js"></script>
+  <script>
+    scrollOnLinks();
+
+    function scrollOnLinks() {
+      const getURL = () => {
+        return window.location.href;
+      };
+
+      let url = getURL();
+      let hashSighIndex = url.lastIndexOf('#');
+      if (hashSighIndex !== -1) {
+        // находим id таба и блока
+        let idBlock = url.slice(hashSighIndex + 1);
+        let andIndex = idBlock.indexOf('&');
+        let tabId, itemId, stringId, imgBoxId, sliderId, idCatalog, dotBlock;
+        // заполняем справочник соответствий ID и позиции слайда для мобилки
+        if (document.body.clientWidth < 1024) {
+          idCatalog = {
+            'plitezhi_i_perevodi&oplachivaite_uslugi': 1,
+            'plitezhi_i_perevodi&upravlyaite_platezhami': 2,
+            'plitezhi_i_perevodi&perevodite_sredstva': 3,
+            'plitezhi_i_perevodi&controliruite_rashodi': 4,
+            'plitezhi_i_perevodi&popolnyaite_karti': 5,
+            'kredit&oformite_kredit': 1,
+            'kredit&oplachivaite_strahovanie': 2,
+            'kredit&sovershaite_platezhi': 3,
+            'kredit&dosrochno_pogashaite': 4,
+            'kk&oformite_kred_kartu': 1,
+            'kk&detali': 2,
+            'kk&otslezhivaite_lp': 3,
+            'kk&otslezhivaite_kb': 4,
+            'kk&vnosite_platezhi': 5,
+            'debet_karti&oformite_kartu': 1,
+            'debet_karti&oplachivaite_srazu': 2,
+            'debet_karti&upravlyaite_kb': 3,
+            'debet_karti&upravlyaite_kartoi': 4,
+            'debet_karti&moi_privilegii': 5,
+            'vkladi&otkrivaite_vkladi_i_ns': 1,
+            'vkladi&upravlyaite_vkladami': 2,
+            'vkladi&otslezhivaite_grafik': 3,
+            'vkladi&investiruite': 4,
+            'vkladi&pereoformlyaite_vkladi': 5,
+            'svyaz&uvedomleniya_ikonka': 1,
+            'svyaz&obrashaites_v_chat': 2,
+            'svyaz&smotrite_adresa': 3,
+            'svyaz&zvonite_v_bank': 4,
+            'svyaz&nastroite_uvedomleniya': 5,
+            'svyaz&vhodite_po_nomeru_karti': 6,
+            'svyaz&vosstanovite_dostup': 7,
+            'demo&poprobuite_demo': 1,
+            'demo&vse_produkti': 2,
+            'demo&chat': 3,
+            'personalnie_dannie&ks': 1,
+            'personalnie_dannie&izmenenie_ks': 2,
+            'personalnie_dannie&sohranenie': 3,
+            'personalnie_dannie&podtverzhdenie': 4,
+            'personalnie_dannie&done': 5,
+            'dokumenti&prosmatrivaite_i_upravlyaite': 1,
+            'dokumenti&sohranyaite_i_peresilaite': 2,
+            'overdraft&oformite_overdraft': 1,
+            'overdraft&prosmatrivaite_detali': 2,
+            'overdraft&otslezvivaite_sroki': 3,
+            'overdraft&vnosite_platezhi': 4,
+            'overdraft&zakritie_overdrafta': 5,
+            'block12&otkroite_mp': 1,
+            'block12&vibirite_vhod': 2,
+            'block12&login': 3,
+            'block12&sozdaite_parol': 4,
+            'block13&avtoobnovlenie_ios': 1,
+            'block13&avtoobnovlenie_android': 2,
+            'block13&samostoyatelnoe_obnovlenie': 3,
+            'block14&vosstanovit_dostup_mozhno': 1,
+            'block14&vibor_vosstanovleniya_dostupa': 2,
+            'block14&vvedite_cod': 3,
+            'block21&vibirite_schet': 1,
+            'block21&vibirite_sposob': 2,
+            'block21&popolnite_schet': 3,
+            'block21&zaprosite_platezh': 4,
+	          'block21&dlya_popolneniya': 5,
+            'block22&vibirite_schet': 1,
+            'block22&sdelat_osnovnim': 2,
+            'block22&oplatit_so_scheta': 3,
+            'block22&prosmatrivaite_rekviziti': 4,
+            'block22&pereimenovivaite_schet': 5,
+            'block23&vibirite_schet': 1,
+            'block23&vipiska_po_schetu': 2,
+            'block23&prosmatrivaite_vipisku': 3,
+            'block23&otpravlyaite_vipisku': 4,
+	          'block23&sokhranyayte_ili_otpravlyaite': 5,
+            'block23&prosmatrivaite_platezhi': 6,
+            'block24&vibirite_schet': 1,
+            'block24&otpavte_spravku': 2,
+            'block31&oformit_kredit': 1,
+            'block31&oznakomtes_s_preimushestvami': 2,
+            'block31&zapolnite_anketu': 3,
+            'block31&podtverdite_dohod': 4,
+            'block31&sformiruite_zapros': 5,
+            'block31&status_zayavki': 6,
+            'block31&reshenie': 7,
+            'block31&vibirite_summu': 8,
+            'block31&oznakomtes_s_usloviyami': 9,
+            'block31&ozhidaite_zachislenie': 10,
+            'block31&oplatite_strahovku': 11,
+            'block32&posle_oformleniya': 1,
+            'block32&inform_v_kartochke': 2,
+            'block32&vnosite_platezhi': 3,
+            'block32&perevodom_so_svoego_scheta': 4,
+            'block32&perevodom_iz_dr_banka': 5,
+            'block32&vnosite_dosrochno': 6,
+            'block32&bistrii_dostup': 7,
+            'block32&sledite_za_grafikom': 8,
+            'block32&smotrite_rekviziti': 9,
+            'block32&dogovor_po_kreditu': 10,
+            'block32&sohranit_ili_pereslat': 11,
+            'block32&spravka_o_pagashenii': 12,
+            'block41&oformit_kk': 1,
+            'block41&oznakomtes_s_preimushestvami_kk': 2,
+            'block41&zapolnite_anketu_kk': 3,
+            'block41&sformiruite_zapros_kk': 4,
+            'block41&status_zayavki_kk': 5,
+            'block41&reshenie_kk': 6,
+            'block41&vibirite_limit_kk': 7,
+            'block41&oznakomtes_s_usloviyami_kk': 8,
+            'block41&ozidaite_itogovoe_reshenie_kk': 9,
+            'block42&posle_oformleniya_kk': 1,
+            'block42&oznakomtes_podrobno': 2,
+            'block42&vnosite_platezhi_kk': 3,
+            'block42&prosmatrivaite_detali': 4,
+            'block42&otslezhivaite_kb': 5,
+            'block43&dostupno_predlozhenie': 1,
+            'block43&otkazatsya': 2,
+            'block43&prinyat': 3,
+            'block44&zakrit_kartu': 1,
+            'block44&podtverdite_sms': 2,
+            'block44&done_kk': 3,
+            'block51&oformit_dk': 1,
+            'block51&ukazhite_schet': 2,
+            'block51&sdelat_virtualnoi': 3,
+            'block51&ili_vibirite_gorod': 4,
+            'block52&aktivirovat_kartu': 1,
+            'block52&vvedite_cifri': 2,
+            'block52&done': 3,
+            'block53&dannie_po_karte': 1,
+            'block53&copiruite_rekviziti': 2,
+            'block53&vibirite_kartu': 3,
+            'block53&oznakomtes_s_funkziyami': 4,
+            'block53&bistrii_dostup': 5,
+            'block53&oznakomtes_s_tp': 6,
+            'block54&vibirite_kartu_gp': 1,
+            'block54&dobavit_gp': 2,
+            'block54&done_gp': 3,
+            'block55&vibirite_kartu_ap': 1,
+            'block55&podtverdite_ap': 2,
+            'block55&done_ap': 3,
+            'block56&vibirite_kartu_lim': 1,
+            'block56&vibirite_operacii_lim': 2,
+            'block56&ustanovite_limit': 3,
+            'block56&vse_nastroiki': 4,
+            'block57&vibirite_kartu_pin': 1,
+            'block57&pridumaite_pin': 2,
+            'block57&podtverdite_pin': 3,
+            'block57&done_pin': 4,
+            'block58&vibirite_kartu_uvedomleniya': 1,
+            'block58&podkluchit_uvedomleniya': 2,
+            'block58&upravlyaite_uvedomleniya': 3,
+            'block59&karta_v_mp_kb': 1,
+            'block59&kb_i_rubrika': 2,
+            'block59&upravlyaite_rubrikami_kb': 3,
+            'block59&proveryaite_balli': 4,
+            'block59&poluchaite_uvedomleniya': 5,
+            'block510&vibirite_kartu_blocking': 1,
+            'block510&vibirite_prichinu_blocking': 2,
+            'block510&podtverdite_deistvie_blocking': 3,
+            'block510&done_blocking': 4,
+            'block510&vremennaya_blocking': 5,
+            'block511&vibirite_kartu_zakrit': 1,
+            'block511&podtverdite_soglasie_zakrit': 2,
+            'block511&done_zakrit': 3,
+            'block61&oformit_vklad': 1,
+            'block61&ukazhite_schet2': 2,
+            'block61&done_vklad': 3,
+            'block61&smotrite_grafik': 4,
+	          'block63&priumnozhit_nakopleniya': 1,
+	          'block63&ukazhite_schet_ns': 2,
+	          'block63&podtverdite_soglasie_ns': 3,
+	          'block63&status_na_stranice_ns': 4,
+	          'block63&otkluchit_opciu_ns': 5,
+            'block64&vibirite_vklad_popolnenie': 1,
+            'block64&poplnit_vklad': 2,
+            'block64&vibirite_schet_vklada_popolnenie': 3,
+            'block65&vibirite_vklad_snyatie': 1,
+            'block65&snyat': 2,
+            'block65&chastichnoe_ili_polnoe': 3,
+            'block65&vibirite_schet_snyatie': 4,
+            'block66&pokazat_vse': 1,
+            'block66&vklad_do_vostrebovaniya': 2,
+            'block66&snyat': 3,
+            'block66&podtverdit': 4,
+            'block66&done_do_vostrebovaniya': 5,
+            'block67&zakrit_schet': 1,
+            'block67&vibirite_schet': 2,
+            'block67&schet_zakrit': 3,
+            'block68&podpishite_soglasie': 1,
+            'block68&oplata': 2,
+            'block68&perevedite_ds': 3,
+            'block68&podtverdit': 4,
+            'block71&platezhi_i_perevodi': 1,
+            'block71&vibirite_tip_uslugu': 2,
+            'block71&poisk': 3,
+            'block71&oplata_po_nomeru_karti': 4,
+            'block71&shablon': 5,
+            'block72&podkluchenie': 1,
+            'block72&sbp': 2,
+            'block72&done_sbp': 3,
+            'block72&oplata_sbp': 4,
+            'block73&oplata_po_QR': 1,
+            'block73&navedite_na_QR': 2,
+            'block73&done_QR': 3,
+            'block74&platezhi_pokazat_vse': 1,
+            'block74&mob_svyaz_internet': 2,
+            'block74&kommunalnie_platezhi': 3,
+            'block74&shtrafi_gbdd': 4,
+            'block74&krediti_storonnih_bankov': 5,
+            'block74&obuchenie': 6,
+            'block74&elektronnie_koshelki': 7,
+            'block75&avtoplatezh': 1,
+            'block75&periodichnost_i_data': 2,
+            'block75&vibirite_schet_avtoplatezhi': 3,
+            'block75&podtverdite_sms_avtoplatezhi': 4,
+            'block75&done_avtoplatezhi': 5,
+            'block75&otkluchit_avtoplatezh': 6,
+            'block81&uvedomleniya': 1,
+            'block81&menyaite_parol': 2,
+            'block81&upravlyaite_kanalami': 3,
+            'block82&chat': 1,
+            'block82&zvonite_iz_prilozheniya': 2,
+            'block82&info': 3,
+            'block83&push': 1,
+            'block83&soobsheniya_v_mp': 2,
+            'block83&kolokolchik': 3,
+            'block83&tipi_uvedomlenii': 4,
+            'block83&predlozheniya': 5,
+            'block84&ofisi_i_atm': 1,
+            'block84&is_menu_eshe': 2,
+            'block84&na_karte_ili_spiskom': 3,
+            'block84&filtr': 4,
+            'block91&podkluchit_overdraft': 1,
+            'block91&podat_zayavku': 2,
+            'block91&zapolnite_anketu': 3,
+            'block91&sformiruite_zapros': 4,
+            'block91&ozhidaite_otvet': 5,
+            'block91&reshenie': 6,
+            'block91&oznakomtes_s_pu': 7,
+            'block91&ozhidaite_zachislenie': 8,
+            'block92&posle_oformleniya': 1,
+            'block92&oznakomtes_s_informaciei': 2,
+            'block92&vnosite_platezhi': 3,
+            'block92&prosmatrivaite_detali': 4,
+            'block93&otkluchit_overdraft': 1,
+            'block93&podtverdite_sms': 2,
+            'block93&done': 3,
+	          'block101&pereydite': 1,
+	          'block101&vyberite': 2,
+	          'block101&sokhranyayte': 3,
+          };
+        }
+
+        if (andIndex !== -1) {
+          if (idBlock.slice(0, 5) === 'block') {
+            let tabStringBlock = idBlock.slice(0, andIndex);
+            tabId = idBlock.slice(0, andIndex - 1);
+            stringId = tabStringBlock;
+            imgBoxId = tabStringBlock + '-img';
+            itemId = idBlock;
+            if (document.body.clientWidth < 1024) {
+              sliderId = '#' + stringId + ' ~ div .slider-slide';
+              dotBlock = document.querySelector('#' + stringId + ' ~ div .slick-dots > li:nth-child(' + idCatalog[itemId] + ') > button');
+            }
+          } else {
+            tabId = idBlock.slice(0, andIndex);
+            itemId = idBlock;
+            imgBoxId = tabId + '-img';
+            // обработка мобилок
+            if (document.body.clientWidth < 1024) {
+              sliderId = tabId + '-m';
+              dotBlock = document.querySelector('#' + sliderId + ' .slick-dots > li:nth-child(' + idCatalog[itemId] + ') > button');
+            }
+          }
+        } else {
+          if (idBlock.slice(0, 5) === 'block') {
+            tabId = idBlock.slice(0, 6);
+            if (idBlock.length > 6) {
+              stringId = idBlock;
+            }
+          } else {
+            tabId = idBlock;
+          }
+        }
+
+        // кликаем по нужному табу
+        let tabBarBlockTarget = document.getElementById(tabId);
+        tabBarBlockTarget.click();
+
+        // кликаем по строке
+        if (stringId) {
+          let itemBlock = document.getElementById(stringId);
+          itemBlock.click();
+        }
+
+        // кликаем по пункту
+        if (itemId) {
+          setTimeout(() => {
+            if (document.body.clientWidth < 1024) {
+              dotBlock.click();
+            } else {
+              let itemBlock = document.getElementById(itemId);
+              itemBlock.click();
+            }
+          }, 100);
+        }
+
+        if (stringId) {
+          if (itemId) {
+            if (document.body.clientWidth < 1024) {
+              scroll(sliderId);
+            } else {
+              scroll('#' + imgBoxId);
+            }
+          } else {
+            scroll('#' + stringId);
+          }
+        } else {
+          if (itemId) {
+            if (document.body.clientWidth < 1024) {
+              scroll('#' + sliderId);
+            } else {
+              scroll('#' + imgBoxId);
+            }
+          } else {
+            scroll('#' + tabId);
+          }
+        }
+        function scroll(itemId) {
+          // скролим к элементу
+          setTimeout(() => {
+            document.querySelector(itemId).scrollIntoView({
+              behavior: 'smooth',
+              block: 'center'
+            });
+          }, 1000);
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>
